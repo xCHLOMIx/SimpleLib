@@ -1,6 +1,10 @@
 import json
 
-books = []
+with open('data.json', 'r') as openfile:
+ 
+    # Reading from json file
+    books = json.load(openfile)
+
 users = []
 
 name = input("Enter your name: \n👉 ")
@@ -11,7 +15,7 @@ def menu():
     }
     users.append(user)
 
-    choice = input("Enter choice: \n(1) Create a new book \n(2) Borrow a book \n(3) Return a book \n(4) Check if a book is available \n(5) See all available books \n(6) Search for books \n(7) Save books as JSON \n👉 ")
+    choice = input("Enter choice: \n(1) Create a new book \n(2) Borrow a book \n(3) Return a book \n(4) Check if a book is available \n(5) See all available books \n(6) Search for books \n(7) Save books as JSON \n(0) Exit \n👉 ")
 
     match choice:
         case '1':
@@ -34,6 +38,8 @@ def menu():
             searchForBooks(title)
         case '7':
             saveAsJSON()
+        case '0':
+            print("Thanks for using our library ❤️")
         case _:
             print("Invalid input")
             menu()
@@ -131,6 +137,7 @@ def availableBooks():
                 print("No available books 🙅‍♂️")
     menu()
 
+# This is the function for searching for books using its title
 def searchForBooks(title):
     if len(books) <= 0:
             print("No books in the library 🙅‍♂️")
@@ -144,13 +151,14 @@ def searchForBooks(title):
         print(f"No more results of '{title}' to be found 🙅‍♂️")
     menu()
 
+# This is the function to save the book[] as JSON
 def saveAsJSON():
     if len(books) <= 0:
         print("No books in the library 🙅‍♂️")
         menu()
     else:
         with open('data.json', 'w') as f:
-            json.dump(books, f)
+            json.dump(books, f, indent=4)
         print("Check your folder 📁")
     menu()
 

@@ -1,11 +1,10 @@
 import json
 
 with open('data.json', 'r') as openfile:
- 
-    # Reading from json file
     books = json.load(openfile)
 
 users = []
+categories = {"Adventure", "Education", "Christian", "Cool"}
 
 name = input("Enter your name: \n👉 ")
 def menu():
@@ -15,13 +14,14 @@ def menu():
     }
     users.append(user)
 
-    choice = input("Enter choice: \n(1) Create a new book \n(2) Borrow a book \n(3) Return a book \n(4) Check if a book is available \n(5) See all available books \n(6) Search for books \n(7) Save books as JSON \n(0) Exit \n👉 ")
+    choice = input("\nEnter choice: \n(1) Create a new book \n(2) Borrow a book \n(3) Return a book \n(4) Check if a book is available \n(5) See all available books \n(6) Search for books \n(7) Save books as JSON \n(0) Exit \n👉 ")
 
     match choice:
         case '1':
             title = input("Enter title for the new book: \n👉 ")
             author = input("Enter author for the new book: \n👉 ")
-            createNewBook(title, author)
+            category = input("Enter category for the new book: \n👉 ")
+            createNewBook(title, author, category)
         case '2':
             title = input("Enter book you want to borrow: \n👉 ")
             borrowBook(title)
@@ -46,11 +46,26 @@ def menu():
 
 # Function to create a new book
 # It creates a new object book with the title given and it's availability set to available by default
-def createNewBook(title, author):
+def createNewBook(title, author, category):
+    # theCategory = ''
+    # match category:
+    #     case '1':
+    #         theCategory = "Adventure"
+    #     case '2':
+    #         theCategory = "Education"
+    #     case '3':
+    #         theCategory = "Christian"
+    #     case '4':
+    #         theCategory = "Cool"
+    #     case _:
+    #         print("Invalid Input")
+    #         createNewBook()
+    categories.add(category)
     newBook = {
         "title": title,
         "author": author,
-        "availability": "available"
+        "availability": "available",
+        "category" : category
     }
 
     books.append(newBook)
@@ -129,7 +144,8 @@ def availableBooks():
         print("No books in the library 🙅‍♂️")
         menu()
     else:
-        for book in books:
+        theBooks = sorted(books, key= lambda book: book['title'])
+        for book in theBooks:
             if book['availability'] == "available":
                 print("Books 📚:")
                 print(f"📕 Title: {book['title']} ✍️  Author: {book['author']} ⏲️  Availability: {book['availability'].capitalize() }")

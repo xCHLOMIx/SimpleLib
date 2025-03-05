@@ -1,17 +1,26 @@
 [
     {
-        "title": "Rich Dad Poor Dad",
-        "author": "Robert Kiyosaki",
-        "availability": "available"
-    },
-    {
         "title": "He Came To Set The Captives Free",
         "author": "Rebecca Brown",
-        "availability": "available"
+        "availability": "available",
+        "category": "Christian"
     },
     {
-        "title": "This book",
-        "author": "This Author",
-        "availability": "available"
+        "title": "Rich Dad Poor Dad",
+        "author": "Robert Kiyosaki",
+        "availability": "available",
+        "category": "Christian"
+    },
+    {
+        "title": "A Man That Loved JESUS",
+        "author": "UNKNOWN",
+        "availability": "available",
+        "category": "Christian"
+    },
+    {
+        "title": "7 Habits of highly effective people",
+        "author": "idk",
+        "availability": "available",
+        "category": "Finance"
     }
 ]

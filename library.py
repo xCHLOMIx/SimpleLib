@@ -1,3 +1,5 @@
+import json
+
 books = []
 users = []
 
@@ -9,7 +11,7 @@ def menu():
     }
     users.append(user)
 
-    choice = input("Enter choice: \n(1) Create a new book \n(2) Borrow a book \n(3) Return a book \n(4) Check if a book is available \n(5) See all available books \n(6) Search for books \n👉 ")
+    choice = input("Enter choice: \n(1) Create a new book \n(2) Borrow a book \n(3) Return a book \n(4) Check if a book is available \n(5) See all available books \n(6) Search for books \n(7) Save books as JSON \n👉 ")
 
     match choice:
         case '1':
@@ -27,6 +29,11 @@ def menu():
             checkAvailability(title)
         case '5':
             availableBooks()
+        case '6':
+            title = input("Search... \n👉 ")
+            searchForBooks(title)
+        case '7':
+            saveAsJSON()
         case _:
             print("Invalid input")
             menu()
@@ -123,5 +130,28 @@ def availableBooks():
             else:
                 print("No available books 🙅‍♂️")
     menu()
-    
+
+def searchForBooks(title):
+    if len(books) <= 0:
+            print("No books in the library 🙅‍♂️")
+            menu()
+    else:
+        for book in books:
+            if title in book['title']:
+                print("Books 📚:")
+                print(f"📕 Title: {book['title']} ✍️  Author: {book['author']} ⏲️  Availability: {book['availability'].capitalize() }")
+                continue
+        print(f"No more results of '{title}' to be found 🙅‍♂️")
+    menu()
+
+def saveAsJSON():
+    if len(books) <= 0:
+        print("No books in the library 🙅‍♂️")
+        menu()
+    else:
+        with open('data.json', 'w') as f:
+            json.dump(books, f)
+        print("Check your folder 📁")
+    menu()
+
 menu()
